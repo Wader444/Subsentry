@@ -112,6 +112,18 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/DATABASE
 Create the database and user in your PostgreSQL provider's dashboard or
 administration tool, then keep the full URL private.
 
+### 5. Deployed frontend origin
+
+When the backend is deployed separately from the frontend, set the frontend
+origin so browser requests pass CORS validation:
+
+```env
+FRONTEND_URL=https://your-project.vercel.app
+```
+
+Use the exact Vercel origin without a trailing slash. Local development keeps
+`http://localhost:5173` and `http://localhost:4173` enabled automatically.
+
 ## Local startup
 
 From the project root:

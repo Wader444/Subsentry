@@ -16,9 +16,17 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="SubSentry")
 
+frontend_url = os.environ.get("FRONTEND_URL", "").rstrip("/")
+allowed_origins = [
+    "http://localhost:5173",
+    "http://localhost:4173",
+]
+if frontend_url and frontend_url not in allowed_origins:
+    allowed_origins.append(frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:4173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
